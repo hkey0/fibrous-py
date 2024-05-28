@@ -36,8 +36,17 @@ tokens["eth"]
 """
 expected output:
 
-Token(address='0x049d36570d4e46f48e99674bd3fcc84644ddd6b96f7c741b1562b82f9e004dc7', name='Ether', symbol='eth', decimals=18, price='3841.3', imageUrl='https:
-//assets.coingecko.com/coins/images/279/small/ethereum.png?1696501628', valuable=True, verified=True, category=None)
+Token(
+    address='0x049d36570d4e46f48e99674bd3fcc84644ddd6b96f7c741b1562b82f9e004dc7',
+    name='Ether',
+    symbol='eth',
+    decimals=18,
+    price='3841.3',
+    imageUrl='https://assets.coingecko.com/coins/images/279/small/ethereum.png?1696501628',
+    valuable=True,
+    verified=True,
+    category=None
+)
 """
 ```
 
