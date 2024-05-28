@@ -116,7 +116,7 @@ async def main():
     tokens = client.supported_tokens()
 
     # amount to swap
-    amount = 0.001 * (10**tokens["eth"].decimals)
+    amount: int = int(0.001 * (10**tokens["eth"].decimals))
 
     # swap call
     swap_call = client.build_transaction(
