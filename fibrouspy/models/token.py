@@ -1,4 +1,4 @@
-from typing import Union, Optional
+from typing import Optional
 from pydantic import BaseModel
 
 
@@ -7,7 +7,7 @@ class Token(BaseModel):
     name: str
     symbol: str
     decimals: int
-    price: Union[str, float]
+    price: str | float
     imageUrl: Optional[str] = None
     valuable: Optional[bool] = None
     verified: bool
