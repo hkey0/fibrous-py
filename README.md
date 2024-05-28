@@ -33,9 +33,8 @@ Get supported tokens by Fibrous.
 tokens = client.supported_tokens()
 tokens["eth"]
 
-"""
-expected output:
 
+# expected output:
 Token(
     address='0x049d36570d4e46f48e99674bd3fcc84644ddd6b96f7c741b1562b82f9e004dc7',
     name='Ether',
@@ -47,7 +46,6 @@ Token(
     verified=True,
     category=None
 )
-"""
 ```
 
 
