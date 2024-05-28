@@ -2,9 +2,16 @@ import enum
 from typing import List, Dict
 
 import requests
+from starknet_py.net.client_models import Call
+from starknet_py.hash.selector import get_selector_from_name
 
-from models import RouteSuccess, Token, Protocol, RouteParams
-from utils import build_route_url
+from .models import (RouteSuccess,
+                    Token,
+                    Protocol,
+                    RouteParams,
+                    RouteExecuteParams)
+
+from .utils import build_route_url, fix_calldata
 
 
 class FibrousClient:
@@ -84,14 +91,38 @@ class FibrousClient:
 
         return route_response
 
+    def build_transaction(self, input_amount: int, token_in_address: str,
+                          token_out_address: str, slippage: float,
+                          destination:str) -> Call:
+        """
+        Get calldata from Fibrous Router to swap tokens.
 
 
-api = FibrousClient()
-data = api.get_best_route(100000000000, "0x049d36570d4e46f48e99674bd3fcc84644ddd6b96f7c741b1562b82f9e004dc7", "0x053c91253bc9682c04929ca02ed00b3e423f6710d2ee7e0d5ebb06f3ecf368a8")
-# data = api.supported_tokens()
+        Args:
+            token_in_address (str): Input token address.
+            token_out_address (str): Output token address.
+            slippage (float): Arbitrary slipage rate.
+                The maximum value this parameter can take is 0.49.
+                1.0 = 100% // 0.1 = 10% // 0.05 = 5%
+            destination (str): Address to send the output token to.
+                You will probably want to pass your address here.
 
-print("cwboolok")
-print(data.outputToken)
 
+        Returns:
+            calldata (Call): Starknetpy call object.
+        """
+        amount = hex(input_amount)
+        route_params = RouteExecuteParams(amount=amount,
+                                         tokenInAddress=token_in_address,
+                                         tokenOutAddress=token_out_address,
+                                         destination=destination,
+                                         slippage=slippage)
+        route_url = build_route_url(f"{self.route_url}/execute", route_params)
+        print(route_url)
+        calldata = requests.get(route_url,
+                               headers=self.headers).json()
 
+        return Call(to_addr=int(self.router_address, 16),
+                    selector=get_selector_from_name("swap"),
+                    calldata=fix_calldata(calldata))
 

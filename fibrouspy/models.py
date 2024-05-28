@@ -61,3 +61,10 @@ class RouteSuccess(BaseModel):
     time: float
     initial: bool
 
+
+class RouteExecuteParams(BaseModel):
+    amount: str
+    tokenInAddress: str
+    tokenOutAddress: str
+    slippage: float
+    destination: str
