@@ -1,3 +1,3 @@
 # fibrous-py
 
-![](https://ibb.co/BcdSgp1)
+![](https://i.ibb.co/5Gtf507/resim-removebg.png)
