@@ -70,4 +70,17 @@ RouteSuccess(
 )
 ```
 
+Build transaction:
+```python
+tokens    = client.supported_tokens()
+swap_call = client.build_transaction(input_amount=10**12,
+                        token_in_address=tokens["eth"].address,
+                        token_out_address=tokens["usdc"].address,
+                        slippage=0.01,
+                        # starknet address
+                        destination="0x07bfe36393355f52844e45622ef0f0fd9bcb18c63f9004060effc8cc0970f8e1")
 
+# expected output:
+
+
+```
