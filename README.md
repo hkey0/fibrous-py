@@ -89,7 +89,7 @@ Call(
 
 ```
 
-## An example swap with Starknet.py
+## Swap example with Starknet.py
 ```python
 import asyncio
 
