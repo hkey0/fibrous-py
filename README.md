@@ -56,7 +56,18 @@ route = client.get_best_route(amount=10**12,
 route
 
 # expected output:
-
-
+RouteSuccess(
+    success=True,
+    inputToken=Token(...),
+    inputAmount='1000000000000',
+    outputToken=Token(...),
+    outputAmount='4117',
+    route=[Route...],
+    estimatedGasUsed='8975364622720',
+    bestQuotesByProtocols=['3821', '3876', '3815', '3878', '3838', '4117', '3883', '0', '3838', '5467'],
+    time=1.354,
+    initial=True
+)
+```
 
 
