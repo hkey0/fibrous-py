@@ -1,33 +1,6 @@
-from enum import Enum
-from typing import List, Any, Optional, Dict
-from dataclasses import dataclass
-
+from typing import List
 from pydantic import BaseModel
-
-class Token(BaseModel):
-    address: str
-    name: str
-    symbol: str
-    decimals: int
-    price: str | float
-    imageUrl: Optional[str] = None
-    valuable: Optional[bool] = None
-    verified: bool
-    category: Optional[str] = None
-
-
-class Protocol(Enum):
-    MYSWAP = 0
-    JEDISWAP = 1
-    TENKSWAP = 2
-    SITHSWAP = 3
-    EKUBO = 4
-    MYSWAPCL = 5
-    STARKDEFI = 6
-    JEDISWAPCL = 7
-    NOSTRA = 8
-    HAIKO = 9
-
+from .token import Token
 
 class RouteParams(BaseModel):
     amount: int

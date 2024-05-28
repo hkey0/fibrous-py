@@ -1,5 +1,4 @@
-from dataclasses import dataclass
-from typing import List
+from typing import List, Union
 from urllib.parse import urlencode
 
 from starknet_py.hash.selector import get_selector_from_name
@@ -13,18 +12,13 @@ def build_route_url(url: str, route_params: RouteParams | RouteExecuteParams) ->
     return f"{url}?{params}"
 
 
-def fix_calldata(calldata: List[str | int]) -> List[int]:
-    new_calldata = []
+def fix_calldata(calldata: List[Union[str, int]]) -> List[int]:
+    def convert(d: Union[str, int]) -> int:
+        if isinstance(d, str):
+            return int(d, 16) if d.startswith("0x") else int(d)
+        return d
 
-    for d in calldata:
-        if isinstance(d, str) and "0x" in d:
-            new_calldata.append(int(d, 16))
-        elif isinstance(d, str)                     :
-            new_calldata.append(int(d))
-        else:
-            new_calldata.append(d)
-
-    return new_calldata
+    return [convert(d) for d in calldata]
 
 
 def build_approve_call(token_address: str, amount: int) -> Call:
