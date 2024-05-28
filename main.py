@@ -18,22 +18,24 @@ async def main():
         chain=StarknetChainId.MAINNET)
 
     amount = 10**15
-    api = FibrousClient()
-    data = api.build_transaction(
+    client = FibrousClient()
+
+    tokens = client.supported_tokens()
+
+    swap_call = client.build_transaction(
         amount,
-        # eth contract address
-        "0x049d36570d4e46f48e99674bd3fcc84644ddd6b96f7c741b1562b82f9e004dc7",
-        # USDC contract adddress
-        "0x053c91253bc9682c04929ca02ed00b3e423f6710d2ee7e0d5ebb06f3ecf368a8",
+        tokens["eth"].address,
+        tokens["usdc"].address,
         0.01,
         "your_address_here")
 
 
-    apr = build_approve_call(
-            token_address="0x049d36570d4e46f48e99674bd3fcc84644ddd6b96f7c741b1562b82f9e004dc7",
+    approve_call = build_approve_call(
+            token_address=tokens["eth"].address,
             amount=amount)
 
-    txre = await account0.execute(calls=[apr, data],
+    txre = await account0.execute(calls=[approve_call,
+                                         swap_call],
                                   max_fee=int(1e16))
 
     print(f"Transaction hash: {hex(txre.transaction_hash)}")

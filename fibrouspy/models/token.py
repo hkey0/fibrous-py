@@ -3,6 +3,9 @@ from pydantic import BaseModel
 
 
 class Token(BaseModel):
+    """
+    Represents ERC20 token
+    """
     address: str
     name: str
     symbol: str
