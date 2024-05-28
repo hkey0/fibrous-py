@@ -33,7 +33,6 @@ Get supported tokens by Fibrous.
 tokens = client.supported_tokens()
 tokens["eth"]
 
-
 # expected output:
 Token(
     address='0x049d36570d4e46f48e99674bd3fcc84644ddd6b96f7c741b1562b82f9e004dc7',
@@ -47,5 +46,17 @@ Token(
     category=None
 )
 ```
+
+Get best route:
+```python
+tokens = client.supported_tokens()
+route = client.get_best_route(amount=10**12,
+                        token_in_address=tokens["eth"].address,
+                        token_out_address=tokens["usdc"].address)
+route
+
+# expected output:
+
+
 
 
