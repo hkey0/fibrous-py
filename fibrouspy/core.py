@@ -44,7 +44,6 @@ class FibrousClient:
         """
         response = requests.get(f"{self.graph_url}/tokens",
                                 headers=self.headers).json()
-        print("get")
         tokens: Dict[str, Token] = {}
         for item in response:
             tokens[item["symbol"].lower()] = Token(**item)
@@ -117,7 +116,6 @@ class FibrousClient:
                                          destination=destination,
                                          slippage=slippage)
         route_url = build_route_url(f"{self.route_url}/execute", route_params)
-        print(route_url)
         calldata = requests.get(route_url,
                                headers=self.headers).json()
 
