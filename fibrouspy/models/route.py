@@ -1,4 +1,4 @@
-from typing import List
+from typing import List, Union
 from pydantic import BaseModel
 from .token import Token
 
@@ -28,6 +28,8 @@ class RouteSuccess(BaseModel):
     inputAmount: str
     outputToken: Token
     outputAmount: str
+
+    # best route
     route: List[Route]
     estimatedGasUsed: str
     bestQuotesByProtocols: List[str]
@@ -36,7 +38,7 @@ class RouteSuccess(BaseModel):
 
 
 class RouteExecuteParams(BaseModel):
-    amount: str
+    amount: Union[int, str]
     tokenInAddress: str
     tokenOutAddress: str
     slippage: float

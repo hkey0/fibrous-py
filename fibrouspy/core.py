@@ -1,4 +1,4 @@
-from typing import List, Dict
+from typing import Dict
 
 import requests
 from starknet_py.net.client_models import Call
